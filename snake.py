@@ -13,7 +13,7 @@ from turtle import *
 
 from freegames import square, vector
 
-food = vector(0, 0)
+food = vector(200, 200)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
@@ -26,7 +26,7 @@ def change(x, y):
 
 def inside(head):
     """Return True if head inside boundaries."""
-    return -200 < head.x < 190 and -200 < head.y < 190
+    return -200 < head.x < 200 and -200 < head.y <= 200
 
 
 def move():
@@ -49,6 +49,17 @@ def move():
         snake.pop(0)
 
     clear()
+
+    
+    movementChance = randrange(0,3)
+    print(movementChance)
+    nextMovement = (randrange(-1, 2) * 10)
+    if((movementChance == 0) and (((nextMovement + food.x) < 200) and ((nextMovement + food.x) > 0))):
+        food.x = food.x + nextMovement
+    elif((movementChance == 1) and (((nextMovement + food.y) < 210) and ((nextMovement + food.y) > 0))):
+        food.y = food.y + nextMovement
+
+
 
     for body in snake:
         square(body.x, body.y, 9, 'black')
